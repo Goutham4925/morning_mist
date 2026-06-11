@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Claude Code
+.claude/
+.claude-cache/
+.claude-agents/
+.claude/settings.local.json
+
+# AI/Agent files
+agents/
+memory/
+workspace/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Cache
+.cache/
+.parcel-cache/
+.turbo/
+
+# Vercel
+.vercel/
+
+# Temp
+tmp/
+temp/
+*.tmp
+
+# TypeScript
+*.tsbuildinfo
+
+# Package manager
+.pnp
+.pnp.js
+
+# Misc
+*.pem
+*.key

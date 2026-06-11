@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+@theme {
+  /* one day at mistwood — fog to lamplight */
+  --color-fog: #f2f3ee;        /* morning fog — page ground */
+  --color-porcelain: #fafaf7;  /* raised cards */
+  --color-linen: #e7e8df;      /* hairline panels */
+  --color-sagemist: #c9d2c5;   /* borders on fog */
+  --color-ink: #1c2b22;        /* pine ink — dark chapters + text */
+  --color-inkdeep: #141f18;    /* nightfall */
+  --color-moss: #33523f;       /* primary green */
+  --color-eucalyptus: #5f7464; /* secondary text */
+  --color-bronze: #9a7b4f;     /* antique bronze — rules, timestamps */
+  --color-bronzelight: #c2a26e;
+  --color-mistcream: #efe9dd;  /* warm whisper, used rarely */
+
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-instrument);
+  --font-script: var(--font-arizonia);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body), sans-serif;
+  background-color: var(--color-fog);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display), serif;
+}
+
+.font-script {
+  font-family: var(--font-script), cursive;
+}
+
+/* ---------- editorial primitives ---------- */
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.timestamp {
+  font-family: var(--font-display), serif;
+  font-style: italic;
+  letter-spacing: 0.08em;
+}
+
+.rule-bronze {
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-bronze), transparent);
+}
+
+.rule-bronze-center {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-bronze), transparent);
+}
+
+/* hairline-framed button, editorial */
+.btn-line {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.25rem;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+}
+
+.btn-line:hover {
+  letter-spacing: 0.34em;
+}
+
+.btn-fill-ink {
+  background: var(--color-ink);
+  color: var(--color-fog);
+  border-color: var(--color-ink);
+}
+
+.btn-fill-ink:hover {
+  background: var(--color-moss);
+  border-color: var(--color-moss);
+}
+
+.btn-fill-bronze {
+  background: var(--color-bronze);
+  color: var(--color-fog);
+  border-color: var(--color-bronze);
+}
+
+.btn-fill-bronze:hover {
+  background: var(--color-bronzelight);
+  border-color: var(--color-bronzelight);
+}
+
+/* ---------- atmosphere ---------- */
+
+.mist-drift {
+  position: absolute;
+  width: 140%;
+  height: 60%;
+  left: -20%;
+  bottom: -10%;
+  pointer-events: none;
+  background: radial-gradient(50% 60% at 50% 60%, rgba(242, 243, 238, 0.12), transparent 70%);
+  filter: blur(40px);
+  animation: drift 20s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from { transform: translateX(-6%) translateY(0); }
+  to   { transform: translateX(6%) translateY(-4%); }
+}
+
+.hero-kenburns {
+  animation: kenburns 32s ease-in-out infinite alternate;
+}
+
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- scroll reveal ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- masterplan hotspots ---------- */
+
+.hotspot-pulse {
+  animation: hotspot 2.4s ease-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes hotspot {
+  0%   { opacity: 0.7; transform: scale(0.6); }
+  70%  { opacity: 0;   transform: scale(2.4); }
+  100% { opacity: 0;   transform: scale(2.4); }
+}
+
+/* ---------- 3d towers ---------- */
+
+.tower-scene {
+  perspective: 1100px;
+}
+
+.tower-3d {
+  transform-style: preserve-3d;
+  transform: rotateY(-24deg) rotateX(6deg);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tower-3d:hover {
+  transform: rotateY(-24deg) rotateX(6deg) translateY(-10px);
+}
+
+.tower-face-side {
+  transform: rotateY(90deg);
+  transform-origin: left center;
+}
+
+.tower-floor {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(194, 162, 110, 0.35) 0 6px,
+    transparent 6px 13px
+  );
+  background-size: auto 40%;
+  background-position: center;
+  background-repeat: repeat-x;
+}
+
+/* ---------- gallery marquee ---------- */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  animation: marquee 48s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation-direction: reverse;
+  animation-duration: 56s;
+}
+
+.marquee-row:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ---------- connectivity spokes ---------- */
+
+.spoke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: spoke-draw 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes spoke-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- glass for nav over photo ---------- */
+
+.nav-solid {
+  background: rgba(242, 243, 238, 0.88);
+  border-bottom: 1px solid rgba(28, 43, 34, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .mist-drift,
+  .hero-kenburns,
+  .marquee-track {
+    animation: none;
+  }
+  .marquee-row {
+    overflow-x: auto;
+  }
+  .spoke {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- misc ---------- */
+
+::selection {
+  background: var(--color-bronze);
+  color: var(--color-fog);
+}

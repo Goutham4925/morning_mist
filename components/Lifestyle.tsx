@@ -95,12 +95,12 @@ function ParallaxPanel({
           className={`flex flex-col ${align}`}
           style={reduced ? undefined : { transform: `translateY(${offset}px)` }}
         >
-          <p className="timestamp text-xl text-bronzelight">{moment.time}</p>
-          <h3 className="font-display mt-3 text-5xl font-light text-fog drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] sm:text-7xl">
+          <p className="timestamp over-photo text-xl text-bronzelight">{moment.time}</p>
+          <h3 className="font-display over-photo mt-3 text-balance text-5xl font-light text-fog sm:text-7xl">
             {moment.title}
           </h3>
           <div className="rule-bronze mt-7 w-24" />
-          <p className="mt-7 max-w-md text-base font-normal leading-relaxed text-fog/90 sm:text-lg">
+          <p className="over-photo mt-7 max-w-md text-pretty text-base font-normal leading-relaxed text-fog/95 sm:text-lg">
             {moment.text}
           </p>
         </div>

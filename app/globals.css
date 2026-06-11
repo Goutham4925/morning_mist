@@ -30,6 +30,42 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* anchored sections clear the fixed nav */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* one consistent, elegant focus ring everywhere */
+:focus-visible {
+  outline: 2px solid var(--color-bronze);
+  outline-offset: 3px;
+}
+
+a,
+button,
+input,
+[role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  background: var(--color-ink);
+  color: var(--color-fog);
+  padding: 0.75rem 1.5rem;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
 .font-display {
   font-family: var(--font-display), serif;
 }
@@ -155,50 +191,30 @@ body {
   transform: translateY(0);
 }
 
-/* ---------- masterplan hotspots ---------- */
+/* ---------- hero entrance ---------- */
 
-.hotspot-pulse {
-  animation: hotspot 2.4s ease-out infinite;
-  transform-origin: center;
-  transform-box: fill-box;
+.rise {
+  opacity: 0;
+  transform: translateY(22px);
+  animation: rise 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes hotspot {
-  0%   { opacity: 0.7; transform: scale(0.6); }
-  70%  { opacity: 0;   transform: scale(2.4); }
-  100% { opacity: 0;   transform: scale(2.4); }
+.rise-1 { animation-delay: 0.15s; }
+.rise-2 { animation-delay: 0.35s; }
+.rise-3 { animation-delay: 0.55s; }
+.rise-4 { animation-delay: 0.75s; }
+.rise-5 { animation-delay: 1s; }
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* ---------- 3d towers ---------- */
-
-.tower-scene {
-  perspective: 1100px;
-}
-
-.tower-3d {
-  transform-style: preserve-3d;
-  transform: rotateY(-24deg) rotateX(6deg);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.tower-3d:hover {
-  transform: rotateY(-24deg) rotateX(6deg) translateY(-10px);
-}
-
-.tower-face-side {
-  transform: rotateY(90deg);
-  transform-origin: left center;
-}
-
-.tower-floor {
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(194, 162, 110, 0.35) 0 6px,
-    transparent 6px 13px
-  );
-  background-size: auto 40%;
-  background-position: center;
-  background-repeat: repeat-x;
+/* readable type over photography */
+.over-photo {
+  text-shadow: 0 1px 2px rgba(10, 18, 13, 0.55), 0 6px 30px rgba(10, 18, 13, 0.45);
 }
 
 /* ---------- gallery marquee ---------- */
@@ -257,6 +273,11 @@ body {
   .hero-kenburns,
   .marquee-track {
     animation: none;
+  }
+  .rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
   .marquee-row {
     overflow-x: auto;

@@ -41,7 +41,7 @@ function Row({ shots, reverse }: { shots: Shot[]; reverse?: boolean }) {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-inkdeep/85 via-transparent to-transparent" />
-            <figcaption className="font-display absolute bottom-4 left-5 text-lg font-light italic text-fog">
+            <figcaption className="font-display over-photo absolute bottom-4 left-5 text-lg font-light italic text-fog">
               <span className="mr-3 inline-block h-px w-6 bg-bronzelight align-middle" aria-hidden />
               {shot.caption}
             </figcaption>

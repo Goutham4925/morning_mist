@@ -16,8 +16,8 @@ export default function Footer() {
           {[
             ["#overview", "Overview"],
             ["#location", "Location"],
-            ["#masterplan", "Masterplan"],
-            ["#towers", "Towers"],
+            ["#forest", "Forest"],
+            ["#amenities", "Amenities"],
             ["#invest", "Invest"],
             ["#contact", "Contact"],
           ].map(([href, label]) => (

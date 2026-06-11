@@ -4,8 +4,6 @@ import Overview from "@/components/Overview";
 import Connectivity from "@/components/Connectivity";
 import Architecture from "@/components/Architecture";
 import Gallery from "@/components/Gallery";
-import Masterplan from "@/components/Masterplan";
-import TowerSelector from "@/components/TowerSelector";
 import Forest from "@/components/Forest";
 import Lifestyle from "@/components/Lifestyle";
 import Amenities from "@/components/Amenities";
@@ -24,8 +22,6 @@ export default function Home() {
       <Overview />
       <Connectivity />
       <Architecture />
-      <Masterplan />
-      <TowerSelector />
       <Forest />
       <Lifestyle />
       <Gallery />

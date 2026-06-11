@@ -164,13 +164,13 @@ export default function Calculator() {
               <div className="mt-10 grid gap-px border border-fog/10 bg-fog/10 sm:grid-cols-3">
                 <div className="bg-ink p-6">
                   <p className="eyebrow text-[9px] text-sagemist/60">You Pay Now (75%)</p>
-                  <p className="font-display mt-3 text-3xl font-light text-fog">
+                  <p className="font-display mt-3 text-3xl font-light tabular-nums text-fog">
                     {inrShort(animPaid)}
                   </p>
                 </div>
                 <div className="bg-bronze/10 p-6">
                   <p className="eyebrow text-[9px] text-bronzelight">Buyback Value</p>
-                  <p className="font-display mt-3 text-3xl font-light text-bronzelight">
+                  <p className="font-display mt-3 text-3xl font-light tabular-nums text-bronzelight">
                     {inrShort(animBuyback)}
                   </p>
                 </div>
@@ -217,13 +217,13 @@ export default function Calculator() {
               <div className="mt-10 flex flex-wrap items-center gap-x-12 gap-y-5 border-t border-fog/10 pt-8">
                 <div>
                   <p className="eyebrow text-[9px] text-sagemist/60">Return on Capital</p>
-                  <p className="timestamp mt-1 text-4xl text-bronzelight">
+                  <p className="timestamp mt-1 text-4xl tabular-nums text-bronzelight">
                     {animRoi.toFixed(1)}%
                   </p>
                 </div>
                 <div>
                   <p className="eyebrow text-[9px] text-sagemist/60">Annualised</p>
-                  <p className="timestamp mt-1 text-4xl text-fog">
+                  <p className="timestamp mt-1 text-4xl tabular-nums text-fog">
                     {animAnnual.toFixed(1)}%
                   </p>
                 </div>

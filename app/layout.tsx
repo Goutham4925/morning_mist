@@ -43,6 +43,10 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: "#f2f3ee",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -51,7 +55,12 @@ export default function RootLayout({
       lang="en"
       className={`${cormorant.variable} ${instrument.variable} ${arizonia.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <a href="#overview" className="skip-link">
+          Skip to content
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

@@ -48,7 +48,7 @@ export default function ChapterHead({
       )}
 
       <h2
-        className={`font-display mt-4 text-4xl font-light leading-[1.08] tracking-tight sm:text-6xl ${
+        className={`font-display mt-4 text-balance text-4xl font-light leading-[1.08] tracking-tight sm:text-6xl ${
           dark ? "text-fog" : "text-ink"
         }`}
       >
@@ -57,7 +57,7 @@ export default function ChapterHead({
 
       {lede && (
         <p
-          className={`mt-7 max-w-xl text-base font-normal leading-relaxed ${
+          className={`mt-7 max-w-xl text-pretty text-base font-normal leading-relaxed ${
             dark ? "text-sagemist/85" : "text-eucalyptus"
           }`}
         >

@@ -9,6 +9,7 @@ import {
   ShoppingBag,
   TrainFront,
 } from "lucide-react";
+import ChapterHead from "./ChapterHead";
 import Reveal from "./Reveal";
 
 type Category = {
@@ -24,7 +25,7 @@ const categories: Category[] = [
     id: "work",
     label: "Work",
     icon: Briefcase,
-    color: "#e3c684",
+    color: "#9a7b4f",
     places: [
       { name: "ITPL Tech Park", mins: 20, note: "Whitefield's flagship IT hub" },
       { name: "EPIP Zone", mins: 22, note: "Export promotion industrial park" },
@@ -36,7 +37,7 @@ const categories: Category[] = [
     id: "transit",
     label: "Transit",
     icon: TrainFront,
-    color: "#87a894",
+    color: "#33523f",
     places: [
       { name: "Whitefield Metro", mins: 15, note: "Purple Line — Kadugodi" },
       { name: "Whitefield Railway Stn", mins: 18, note: "Suburban rail link" },
@@ -48,7 +49,7 @@ const categories: Category[] = [
     id: "schools",
     label: "Schools",
     icon: GraduationCap,
-    color: "#9fc3a9",
+    color: "#5f7464",
     places: [
       { name: "Deens Academy", mins: 15, note: "CBSE, Whitefield" },
       { name: "Glentree Academy", mins: 18, note: "ICSE & early years" },
@@ -60,7 +61,7 @@ const categories: Category[] = [
     id: "health",
     label: "Healthcare",
     icon: HeartPulse,
-    color: "#d8b56a",
+    color: "#8a6a3e",
     places: [
       { name: "Manipal Hospital", mins: 20, note: "Multi-speciality, Whitefield" },
       { name: "Vydehi Institute", mins: 20, note: "Teaching hospital & ER" },
@@ -72,7 +73,7 @@ const categories: Category[] = [
     id: "leisure",
     label: "Leisure",
     icon: ShoppingBag,
-    color: "#cfdcd2",
+    color: "#42604d",
     places: [
       { name: "Forum Shantiniketan", mins: 18, note: "Mall, dining & cinema" },
       { name: "VR Bengaluru", mins: 22, note: "The Black Box on Whitefield Rd" },
@@ -82,7 +83,6 @@ const categories: Category[] = [
   },
 ];
 
-/* fixed spoke endpoints around the hub (SVG coords) */
 const spokeEnds = [
   { x: 150, y: 90 },
   { x: 470, y: 70 },
@@ -93,37 +93,28 @@ const spokeEnds = [
 export default function Connectivity() {
   const [active, setActive] = useState(0);
   const cat = categories[active];
-
   const maxMins = 60;
 
   return (
-    <section id="location" className="relative overflow-hidden bg-forest py-24 sm:py-32">
-      <div className="topo-lines text-mist" />
-      <div className="glow-orb right-[10%] top-[10%] h-80 w-80 bg-fern/20" />
-      <div className="mist-drift" />
-
+    <section id="location" className="relative overflow-hidden bg-linen py-28 sm:py-36">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-medium uppercase tracking-[0.32em] text-gold-light">
-            Location &amp; Connectivity
-          </p>
-          <h2 className="font-display mt-5 text-3xl leading-snug text-cream sm:text-5xl">
-            Minutes From Everything.
-            <br />
-            <span className="text-gradient-gold">Miles From Ordinary.</span>
-          </h2>
-          <div className="gold-line mx-auto mt-8 w-24" />
-          <p className="mt-8 text-base font-light leading-relaxed text-mist">
-            Tucked into the green edge of Whitefield — close enough for the commute,
-            far enough for the calm. Pick a category and watch the city unfold
-            around you.
-          </p>
-        </Reveal>
+        <ChapterHead
+          time="08:10 — the commute, reconsidered"
+          script="unhurried"
+          title={
+            <>
+              Minutes from everything,
+              <br />
+              <span className="italic text-moss">miles from ordinary</span>
+            </>
+          }
+          lede="Tucked into the green edge of Whitefield — close enough for the commute, far enough for the calm. Pick a category and watch the city unfold."
+        />
 
         {/* category tabs */}
         <Reveal delay={100}>
           <div
-            className="mt-12 flex flex-wrap justify-center gap-3"
+            className="mt-14 flex flex-wrap justify-center gap-x-2 gap-y-3"
             role="tablist"
             aria-label="Connectivity categories"
           >
@@ -134,31 +125,30 @@ export default function Connectivity() {
                 role="tab"
                 aria-selected={active === i}
                 onClick={() => setActive(i)}
-                className={`flex cursor-pointer items-center gap-2.5 rounded-full border px-6 py-3 text-sm uppercase tracking-[0.14em] transition-all duration-300 ${
+                className={`flex cursor-pointer items-center gap-2.5 border px-7 py-3.5 text-[11px] uppercase tracking-[0.24em] transition-all duration-300 ${
                   active === i
-                    ? "border-gold bg-gold/15 text-gold-light shadow-[0_0_30px_rgba(200,162,75,0.15)]"
-                    : "border-cream/15 text-sage hover:border-gold/40 hover:text-mist"
+                    ? "border-ink bg-ink text-fog"
+                    : "border-ink/15 text-ink/70 hover:border-ink/40 hover:text-ink"
                 }`}
               >
-                <c.icon size={16} aria-hidden />
+                <c.icon size={15} aria-hidden />
                 {c.label}
               </button>
             ))}
           </div>
         </Reveal>
 
-        <div className="mt-12 grid items-stretch gap-8 lg:grid-cols-2">
+        <div className="mt-12 grid items-stretch gap-10 lg:grid-cols-2">
           {/* radial map */}
           <Reveal>
-            <div className="glass relative h-full overflow-hidden rounded-3xl p-6 sm:p-8">
+            <div className="relative h-full border border-ink/10 bg-porcelain p-6 sm:p-8">
               <svg
-                key={cat.id} /* remount to replay spoke animation */
+                key={cat.id}
                 viewBox="0 0 660 360"
                 className="h-auto w-full"
                 role="img"
                 aria-label={`Drive-time map from Mistwood to ${cat.label.toLowerCase()} destinations`}
               >
-                {/* range rings */}
                 {[70, 120, 170].map((r) => (
                   <circle
                     key={r}
@@ -166,16 +156,15 @@ export default function Connectivity() {
                     cy="185"
                     r={r}
                     fill="none"
-                    stroke="rgba(207,220,210,0.10)"
+                    stroke="rgba(28,43,34,0.10)"
                     strokeWidth="1"
-                    strokeDasharray="4 6"
+                    strokeDasharray="3 6"
                   />
                 ))}
-                <text x="330" y="62" textAnchor="middle" fontSize="9" fill="rgba(135,168,148,0.6)" letterSpacing="2">
+                <text x="330" y="62" textAnchor="middle" fontSize="9" fill="rgba(95,116,100,0.7)" letterSpacing="2">
                   ~30 MIN
                 </text>
 
-                {/* spokes */}
                 {cat.places.map((p, i) => {
                   const end = spokeEnds[i];
                   return (
@@ -186,7 +175,7 @@ export default function Connectivity() {
                         fill="none"
                         stroke={cat.color}
                         strokeWidth="1.5"
-                        opacity="0.7"
+                        opacity="0.75"
                         pathLength={1}
                         style={{ animationDelay: `${i * 0.12}s` }}
                       />
@@ -196,19 +185,20 @@ export default function Connectivity() {
                         x={end.x}
                         y={end.y - 18}
                         textAnchor="middle"
-                        fontSize="12"
-                        fill="#f6f4ec"
-                        fontFamily="var(--font-josefin)"
+                        fontSize="12.5"
+                        fill="#1c2b22"
+                        fontFamily="var(--font-instrument)"
                       >
                         {p.name}
                       </text>
                       <text
                         x={end.x}
-                        y={end.y + 26}
+                        y={end.y + 28}
                         textAnchor="middle"
-                        fontSize="11"
+                        fontSize="13"
                         fill={cat.color}
-                        fontFamily="var(--font-josefin)"
+                        fontFamily="var(--font-cormorant)"
+                        fontStyle="italic"
                         letterSpacing="1"
                       >
                         {p.mins} min
@@ -218,59 +208,56 @@ export default function Connectivity() {
                 })}
 
                 {/* hub */}
-                <circle cx="330" cy="185" r="34" fill="rgba(200,162,75,0.12)" />
-                <circle cx="330" cy="185" r="22" fill="#0c1d14" stroke="#c8a24b" strokeWidth="2" />
+                <circle cx="330" cy="185" r="34" fill="rgba(154,123,79,0.10)" />
+                <circle cx="330" cy="185" r="22" fill="#1c2b22" />
                 <text
                   x="330"
                   y="181"
                   textAnchor="middle"
-                  fontSize="9"
-                  fill="#e3c684"
+                  fontSize="8.5"
+                  fill="#c2a26e"
                   letterSpacing="2"
-                  fontFamily="var(--font-cinzel)"
+                  fontFamily="var(--font-instrument)"
                 >
                   MIST
                 </text>
                 <text
                   x="330"
-                  y="193"
+                  y="192"
                   textAnchor="middle"
-                  fontSize="9"
-                  fill="#e3c684"
+                  fontSize="8.5"
+                  fill="#c2a26e"
                   letterSpacing="2"
-                  fontFamily="var(--font-cinzel)"
+                  fontFamily="var(--font-instrument)"
                 >
                   WOOD
                 </text>
               </svg>
-              <p className="mt-2 text-center text-[10px] font-light uppercase tracking-[0.22em] text-sage/60">
+              <p className="mt-3 text-center text-[10px] uppercase tracking-[0.24em] text-eucalyptus/70">
                 Indicative drive times in regular traffic — not to scale
               </p>
             </div>
           </Reveal>
 
-          {/* destination list */}
+          {/* destination ledger */}
           <Reveal delay={120}>
-            <div key={cat.id} className="flex h-full flex-col gap-3">
+            <div key={cat.id} className="flex h-full flex-col">
               {cat.places.map((p, i) => (
                 <div
                   key={p.name}
-                  className="glass reveal reveal-visible flex flex-1 items-center gap-5 rounded-2xl px-6 py-5 transition-all duration-300 hover:border-gold/40"
+                  className="reveal reveal-visible flex flex-1 items-center gap-6 border-b border-ink/10 py-6 first:border-t"
                   style={{ transitionDelay: `${i * 60}ms` }}
                 >
-                  <div
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border"
-                    style={{ borderColor: `${cat.color}55`, background: `${cat.color}14` }}
-                  >
-                    <Clock size={18} style={{ color: cat.color }} aria-hidden />
-                  </div>
+                  <p className="timestamp w-20 shrink-0 text-3xl text-bronze">
+                    {p.mins}
+                    <span className="ml-1 text-sm text-eucalyptus">min</span>
+                  </p>
                   <div className="min-w-0 flex-1">
-                    <p className="text-base text-cream">{p.name}</p>
-                    <p className="mt-0.5 truncate text-xs font-light text-sage">{p.note}</p>
-                    {/* drive-time bar */}
-                    <div className="mt-2.5 h-1 w-full overflow-hidden rounded-full bg-cream/8">
+                    <p className="font-display text-xl font-normal text-ink">{p.name}</p>
+                    <p className="mt-0.5 truncate text-sm text-eucalyptus">{p.note}</p>
+                    <div className="mt-2.5 h-px w-full bg-ink/8">
                       <div
-                        className="h-full rounded-full transition-[width] duration-700 ease-out"
+                        className="h-full transition-[width] duration-700 ease-out"
                         style={{
                           width: `${(p.mins / maxMins) * 100}%`,
                           background: cat.color,
@@ -278,10 +265,7 @@ export default function Connectivity() {
                       />
                     </div>
                   </div>
-                  <p className="font-display shrink-0 text-2xl text-gold-light">
-                    {p.mins}
-                    <span className="ml-1 text-xs font-light tracking-widest text-sage">MIN</span>
-                  </p>
+                  <Clock size={16} className="shrink-0 text-eucalyptus/50" aria-hidden />
                 </div>
               ))}
             </div>

@@ -36,7 +36,11 @@ export default function Contact() {
     );
 
   const canNext =
-    step === 0 ? purpose !== null && config.length > 0 : step === 1 ? budget !== "" && timeline !== "" : true;
+    step === 0
+      ? purpose !== null && config.length > 0
+      : step === 1
+        ? budget !== "" && timeline !== ""
+        : true;
 
   const summary = [
     purpose === "home" ? "A home to live in" : "An investment",
@@ -82,79 +86,79 @@ export default function Contact() {
     )}&body=${encodeURIComponent(composeMessage())}`;
   };
 
-  return (
-    <section id="contact" className="relative overflow-hidden bg-pine py-24 sm:py-32">
-      <div className="topo-lines text-mist" />
-      <div className="glow-orb right-[0%] top-[10%] h-72 w-72 bg-gold/10" />
-      <div className="mist-drift" />
+  const inputCls =
+    "w-full border border-ink/15 bg-porcelain px-5 py-4 text-base text-ink placeholder:text-eucalyptus/50 focus:border-bronze focus:outline-none focus:ring-1 focus:ring-bronze/40";
 
+  const chip = (selected: boolean) =>
+    `cursor-pointer border px-5 py-2.5 text-[11px] uppercase tracking-[0.18em] transition-all duration-200 ${
+      selected
+        ? "border-bronze bg-bronze/10 text-bronze"
+        : "border-ink/15 text-eucalyptus hover:border-bronze/50 hover:text-bronze"
+    }`;
+
+  return (
+    <section id="contact" className="relative overflow-hidden bg-fog py-28 sm:py-36">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
           <Reveal>
-            <p className="text-xs font-medium uppercase tracking-[0.32em] text-gold-light">
-              Begin Your Morning at Mistwood
+            <p className="timestamp text-lg text-bronze">22:00 — lamplight</p>
+            <p className="font-script mt-5 text-5xl text-bronze/80 sm:text-6xl" aria-hidden>
+              begin,
             </p>
-            <h2 className="font-display mt-5 text-3xl leading-snug text-cream sm:text-5xl">
-              Tell Us What You&apos;re Looking For
+            <h2 className="font-display mt-3 text-4xl font-light leading-[1.08] tracking-tight text-ink sm:text-6xl">
+              tell us what you&apos;re
+              <br />
+              <span className="italic text-moss">looking for</span>
             </h2>
-            <div className="gold-line mt-8 w-24" />
-            <p className="mt-8 max-w-md text-base font-light leading-relaxed text-mist">
+            <p className="mt-8 max-w-md text-base leading-relaxed text-eucalyptus">
               Three quick questions, and the right specialist calls you back — no
               endless forms, no spam.
             </p>
 
-            <div className="mt-12 space-y-6">
-              <a
-                href="tel:+919036526147"
-                className="group flex items-center gap-5 text-mist transition-colors hover:text-gold-light"
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-cream/15 bg-cream/5 transition-colors group-hover:border-gold/40">
-                  <Phone size={18} aria-hidden />
-                </span>
-                <span className="text-base font-light tracking-wide">+91 90365 26147</span>
-              </a>
-              <a
-                href="mailto:zain@tatra.one"
-                className="group flex items-center gap-5 text-mist transition-colors hover:text-gold-light"
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-cream/15 bg-cream/5 transition-colors group-hover:border-gold/40">
-                  <Mail size={18} aria-hidden />
-                </span>
-                <span className="text-base font-light tracking-wide">zain@tatra.one</span>
-              </a>
-              <a
-                href="https://www.tatra.one"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-5 text-mist transition-colors hover:text-gold-light"
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-cream/15 bg-cream/5 transition-colors group-hover:border-gold/40">
-                  <Globe size={18} aria-hidden />
-                </span>
-                <span className="text-base font-light tracking-wide">
-                  www.tatra.one
-                  <span className="ml-3 text-xs uppercase tracking-[0.2em] text-sage">
-                    Strategic Partner
-                  </span>
-                </span>
-              </a>
+            <div className="mt-12 space-y-1">
+              {[
+                { icon: Phone, label: "+91 90365 26147", href: "tel:+919036526147", note: "" },
+                { icon: Mail, label: "zain@tatra.one", href: "mailto:zain@tatra.one", note: "" },
+                {
+                  icon: Globe,
+                  label: "www.tatra.one",
+                  href: "https://www.tatra.one",
+                  note: "Strategic Partner",
+                },
+              ].map((row) => (
+                <a
+                  key={row.label}
+                  href={row.href}
+                  target={row.href.startsWith("http") ? "_blank" : undefined}
+                  rel={row.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="group flex items-center gap-5 border-b border-ink/10 py-5 text-ink transition-colors first:border-t hover:text-bronze"
+                >
+                  <row.icon size={17} className="text-bronze" strokeWidth={1.5} aria-hidden />
+                  <span className="font-display text-xl font-light">{row.label}</span>
+                  {row.note && (
+                    <span className="ml-auto text-[10px] uppercase tracking-[0.24em] text-eucalyptus">
+                      {row.note}
+                    </span>
+                  )}
+                </a>
+              ))}
             </div>
           </Reveal>
 
           {/* stepper */}
           <Reveal delay={120}>
-            <div className="glass rounded-3xl p-8 sm:p-10">
+            <div className="border border-ink/10 bg-porcelain p-9 sm:p-11">
               {/* progress */}
               <div className="flex items-center gap-3" aria-hidden>
                 {[0, 1, 2].map((s) => (
                   <div key={s} className="flex flex-1 items-center gap-3">
                     <span
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-xs transition-all duration-300 ${
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center border text-xs transition-all duration-300 ${
                         step > s
-                          ? "border-gold bg-gold text-forest"
+                          ? "border-bronze bg-bronze text-fog"
                           : step === s
-                            ? "border-gold text-gold-light"
-                            : "border-cream/20 text-sage"
+                            ? "border-bronze text-bronze"
+                            : "border-ink/20 text-eucalyptus"
                       }`}
                     >
                       {step > s ? <Check size={14} /> : s + 1}
@@ -162,7 +166,7 @@ export default function Contact() {
                     {s < 2 && (
                       <span
                         className={`h-px flex-1 transition-colors duration-300 ${
-                          step > s ? "bg-gold" : "bg-cream/15"
+                          step > s ? "bg-bronze" : "bg-ink/15"
                         }`}
                       />
                     )}
@@ -173,10 +177,9 @@ export default function Contact() {
                 Step {step + 1} of 3
               </p>
 
-              {/* step 0 — intent */}
               {step === 0 && (
-                <div className="mt-9">
-                  <h3 className="font-display text-xl text-cream">
+                <div className="mt-10">
+                  <h3 className="font-display text-2xl font-light italic text-ink">
                     What brings you to Mistwood?
                   </h3>
                   <div className="mt-6 grid grid-cols-2 gap-3">
@@ -184,33 +187,31 @@ export default function Contact() {
                       type="button"
                       onClick={() => setPurpose("home")}
                       aria-pressed={purpose === "home"}
-                      className={`cursor-pointer rounded-2xl border p-6 text-left transition-all duration-200 ${
+                      className={`cursor-pointer border p-6 text-left transition-all duration-200 ${
                         purpose === "home"
-                          ? "border-gold bg-gold/15"
-                          : "border-cream/15 hover:border-gold/40"
+                          ? "border-bronze bg-bronze/10"
+                          : "border-ink/15 hover:border-bronze/50"
                       }`}
                     >
-                      <Home size={22} className="text-gold-light" aria-hidden />
-                      <p className="mt-3 text-sm text-cream">A home to live in</p>
+                      <Home size={21} className="text-bronze" strokeWidth={1.5} aria-hidden />
+                      <p className="mt-3 text-sm text-ink">A home to live in</p>
                     </button>
                     <button
                       type="button"
                       onClick={() => setPurpose("investment")}
                       aria-pressed={purpose === "investment"}
-                      className={`cursor-pointer rounded-2xl border p-6 text-left transition-all duration-200 ${
+                      className={`cursor-pointer border p-6 text-left transition-all duration-200 ${
                         purpose === "investment"
-                          ? "border-gold bg-gold/15"
-                          : "border-cream/15 hover:border-gold/40"
+                          ? "border-bronze bg-bronze/10"
+                          : "border-ink/15 hover:border-bronze/50"
                       }`}
                     >
-                      <TrendingUp size={22} className="text-gold-light" aria-hidden />
-                      <p className="mt-3 text-sm text-cream">An investment</p>
+                      <TrendingUp size={21} className="text-bronze" strokeWidth={1.5} aria-hidden />
+                      <p className="mt-3 text-sm text-ink">An investment</p>
                     </button>
                   </div>
 
-                  <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.24em] text-sage">
-                    Configuration — pick any
-                  </p>
+                  <p className="eyebrow mt-9 text-eucalyptus">Configuration — pick any</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {configs.map((c) => (
                       <button
@@ -218,11 +219,7 @@ export default function Contact() {
                         type="button"
                         onClick={() => toggleConfig(c)}
                         aria-pressed={config.includes(c)}
-                        className={`cursor-pointer rounded-full border px-5 py-2.5 text-sm transition-all duration-200 ${
-                          config.includes(c)
-                            ? "border-gold bg-gold/15 text-gold-light"
-                            : "border-cream/15 text-mist hover:border-gold/40"
-                        }`}
+                        className={chip(config.includes(c))}
                       >
                         {c}
                       </button>
@@ -231,15 +228,12 @@ export default function Contact() {
                 </div>
               )}
 
-              {/* step 1 — budget + timeline */}
               {step === 1 && (
-                <div className="mt-9">
-                  <h3 className="font-display text-xl text-cream">
+                <div className="mt-10">
+                  <h3 className="font-display text-2xl font-light italic text-ink">
                     Budget &amp; timeline
                   </h3>
-                  <p className="mt-6 text-[11px] font-medium uppercase tracking-[0.24em] text-sage">
-                    Budget Range
-                  </p>
+                  <p className="eyebrow mt-7 text-eucalyptus">Budget Range</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {budgets.map((b) => (
                       <button
@@ -247,19 +241,13 @@ export default function Contact() {
                         type="button"
                         onClick={() => setBudget(b)}
                         aria-pressed={budget === b}
-                        className={`cursor-pointer rounded-full border px-5 py-2.5 text-sm transition-all duration-200 ${
-                          budget === b
-                            ? "border-gold bg-gold/15 text-gold-light"
-                            : "border-cream/15 text-mist hover:border-gold/40"
-                        }`}
+                        className={chip(budget === b)}
                       >
                         {b}
                       </button>
                     ))}
                   </div>
-                  <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.24em] text-sage">
-                    When are you planning?
-                  </p>
+                  <p className="eyebrow mt-9 text-eucalyptus">When are you planning?</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {timelines.map((t) => (
                       <button
@@ -267,11 +255,7 @@ export default function Contact() {
                         type="button"
                         onClick={() => setTimeline(t)}
                         aria-pressed={timeline === t}
-                        className={`cursor-pointer rounded-full border px-5 py-2.5 text-sm transition-all duration-200 ${
-                          timeline === t
-                            ? "border-gold bg-gold/15 text-gold-light"
-                            : "border-cream/15 text-mist hover:border-gold/40"
-                        }`}
+                        className={chip(timeline === t)}
                       >
                         {t}
                       </button>
@@ -280,20 +264,18 @@ export default function Contact() {
                 </div>
               )}
 
-              {/* step 2 — contact + handoff */}
               {step === 2 && (
-                <div className="mt-9">
-                  <h3 className="font-display text-xl text-cream">Almost there</h3>
-                  <p className="mt-3 rounded-xl border border-cream/10 bg-forest/40 px-4 py-3 text-xs font-light leading-relaxed text-sage">
+                <div className="mt-10">
+                  <h3 className="font-display text-2xl font-light italic text-ink">
+                    Almost there
+                  </h3>
+                  <p className="mt-4 border border-ink/10 bg-fog px-4 py-3 text-xs leading-relaxed text-eucalyptus">
                     {summary}
                   </p>
                   <div className="mt-6 space-y-5">
                     <div>
-                      <label
-                        htmlFor="enq-name"
-                        className="mb-2 block text-xs font-medium uppercase tracking-[0.2em] text-sage"
-                      >
-                        Full Name <span className="text-gold">*</span>
+                      <label htmlFor="enq-name" className="eyebrow mb-2 block text-eucalyptus">
+                        Full Name <span className="text-bronze">*</span>
                       </label>
                       <input
                         id="enq-name"
@@ -302,15 +284,12 @@ export default function Contact() {
                         onChange={(e) => setName(e.target.value)}
                         autoComplete="name"
                         placeholder="Your name"
-                        className="w-full rounded-xl border border-cream/15 bg-forest/40 px-5 py-4 text-base font-light text-cream placeholder:text-sage/50 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+                        className={inputCls}
                       />
                     </div>
                     <div>
-                      <label
-                        htmlFor="enq-phone"
-                        className="mb-2 block text-xs font-medium uppercase tracking-[0.2em] text-sage"
-                      >
-                        Phone Number <span className="text-gold">*</span>
+                      <label htmlFor="enq-phone" className="eyebrow mb-2 block text-eucalyptus">
+                        Phone Number <span className="text-bronze">*</span>
                       </label>
                       <input
                         id="enq-phone"
@@ -319,11 +298,11 @@ export default function Contact() {
                         onChange={(e) => setPhone(e.target.value)}
                         autoComplete="tel"
                         placeholder="+91"
-                        className="w-full rounded-xl border border-cream/15 bg-forest/40 px-5 py-4 text-base font-light text-cream placeholder:text-sage/50 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+                        className={inputCls}
                       />
                     </div>
                     {error && (
-                      <p role="alert" className="text-sm font-light text-red-300">
+                      <p role="alert" className="text-sm text-red-700">
                         {error}
                       </p>
                     )}
@@ -331,16 +310,16 @@ export default function Contact() {
                       <button
                         type="button"
                         onClick={sendWhatsApp}
-                        className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-gold px-6 py-4 text-sm font-medium uppercase tracking-[0.14em] text-forest transition-all duration-300 hover:bg-gold-light"
+                        className="btn-line btn-fill-ink justify-center"
                       >
-                        <MessageCircle size={16} aria-hidden /> WhatsApp Us
+                        <MessageCircle size={15} aria-hidden /> WhatsApp Us
                       </button>
                       <button
                         type="button"
                         onClick={sendEmail}
-                        className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-cream/20 px-6 py-4 text-sm font-light uppercase tracking-[0.14em] text-cream transition-all duration-300 hover:border-gold hover:text-gold-light"
+                        className="btn-line justify-center text-ink hover:bg-ink hover:text-fog"
                       >
-                        <Mail size={16} aria-hidden /> Email Instead
+                        <Mail size={15} aria-hidden /> Email Instead
                       </button>
                     </div>
                   </div>
@@ -348,23 +327,23 @@ export default function Contact() {
               )}
 
               {/* nav */}
-              <div className="mt-9 flex items-center justify-between border-t border-cream/10 pt-6">
+              <div className="mt-10 flex items-center justify-between border-t border-ink/10 pt-7">
                 <button
                   type="button"
                   onClick={() => setStep((s) => Math.max(0, s - 1))}
                   disabled={step === 0}
-                  className="flex cursor-pointer items-center gap-2 text-sm font-light uppercase tracking-[0.14em] text-sage transition-colors hover:text-gold-light disabled:cursor-not-allowed disabled:opacity-30"
+                  className="flex cursor-pointer items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-eucalyptus transition-colors hover:text-bronze disabled:cursor-not-allowed disabled:opacity-30"
                 >
-                  <ArrowLeft size={15} aria-hidden /> Back
+                  <ArrowLeft size={14} aria-hidden /> Back
                 </button>
                 {step < 2 && (
                   <button
                     type="button"
                     onClick={() => canNext && setStep((s) => s + 1)}
                     disabled={!canNext}
-                    className="flex cursor-pointer items-center gap-2 rounded-full bg-gold px-7 py-3 text-sm font-medium uppercase tracking-[0.14em] text-forest transition-all duration-300 hover:bg-gold-light disabled:cursor-not-allowed disabled:opacity-40"
+                    className="btn-line btn-fill-bronze disabled:cursor-not-allowed disabled:opacity-40"
                   >
-                    Continue <ArrowRight size={15} aria-hidden />
+                    Continue <ArrowRight size={14} aria-hidden />
                   </button>
                 )}
               </div>

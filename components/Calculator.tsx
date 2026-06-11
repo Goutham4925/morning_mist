@@ -35,8 +35,7 @@ function useCountUp(target: number, duration = 700) {
 }
 
 const inr = (n: number) =>
-  "₹" +
-  Math.round(n).toLocaleString("en-IN", { maximumFractionDigits: 0 });
+  "₹" + Math.round(n).toLocaleString("en-IN", { maximumFractionDigits: 0 });
 
 const inrShort = (n: number) => {
   if (n >= 1e7) return `₹${(n / 1e7).toFixed(2)} Cr`;
@@ -65,45 +64,25 @@ export default function Calculator() {
   const barMax = Math.max(paidNow, buybackValue);
 
   return (
-    <section id="calculator" className="relative overflow-hidden bg-forest py-24 sm:py-32">
-      <div className="topo-lines text-mist" />
-      <div className="glow-orb right-[10%] top-[25%] h-72 w-72 bg-gold/10" />
-
+    <section id="calculator" className="relative overflow-hidden bg-inkdeep py-28 sm:py-36">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-medium uppercase tracking-[0.32em] text-gold-light">
-            Run the Numbers
-          </p>
-          <h2 className="font-display mt-5 text-3xl leading-snug text-cream sm:text-5xl">
-            Your Investment, Visualised
-          </h2>
-          <div className="gold-line mx-auto mt-8 w-24" />
-          <p className="mt-8 text-base font-light leading-relaxed text-mist">
-            Slide to model your entry — and see what the guaranteed buyback returns
-            at 18 or 24 months.
-          </p>
-        </Reveal>
-
-        <div className="mt-14 grid gap-8 lg:grid-cols-[2fr_3fr]">
+        <div className="grid gap-10 lg:grid-cols-[2fr_3fr]">
           {/* inputs */}
           <Reveal>
-            <div className="glass h-full rounded-3xl p-8 sm:p-10">
+            <div className="h-full border border-fog/15 bg-ink p-9 sm:p-11">
               <div className="flex items-center gap-3">
-                <CalcIcon size={20} className="text-gold-light" aria-hidden />
-                <h3 className="font-display text-xl text-cream">Model Your Entry</h3>
+                <CalcIcon size={19} className="text-bronzelight" strokeWidth={1.5} aria-hidden />
+                <h3 className="font-display text-2xl font-light italic text-fog">
+                  Model your entry
+                </h3>
               </div>
 
-              <div className="mt-9">
+              <div className="mt-10">
                 <div className="flex items-baseline justify-between">
-                  <label
-                    htmlFor="price"
-                    className="text-[11px] font-medium uppercase tracking-[0.24em] text-sage"
-                  >
+                  <label htmlFor="price" className="eyebrow text-sagemist/70">
                     Purchase Price / sq.ft
                   </label>
-                  <span className="font-display text-lg text-gold-light">
-                    {inr(pricePerSqft)}
-                  </span>
+                  <span className="timestamp text-xl text-bronzelight">{inr(pricePerSqft)}</span>
                 </div>
                 <input
                   id="price"
@@ -113,23 +92,20 @@ export default function Calculator() {
                   step={100}
                   value={pricePerSqft}
                   onChange={(e) => setPricePerSqft(Number(e.target.value))}
-                  className="mt-4 w-full cursor-pointer accent-[#c8a24b]"
+                  className="mt-4 w-full cursor-pointer accent-[#c2a26e]"
                 />
-                <div className="mt-1 flex justify-between text-[10px] uppercase tracking-widest text-sage/60">
+                <div className="mt-1 flex justify-between text-[10px] uppercase tracking-widest text-sagemist/50">
                   <span>₹10,000</span>
                   <span>₹14,000</span>
                 </div>
               </div>
 
-              <div className="mt-9">
+              <div className="mt-10">
                 <div className="flex items-baseline justify-between">
-                  <label
-                    htmlFor="area"
-                    className="text-[11px] font-medium uppercase tracking-[0.24em] text-sage"
-                  >
+                  <label htmlFor="area" className="eyebrow text-sagemist/70">
                     Unit Area
                   </label>
-                  <span className="font-display text-lg text-gold-light">
+                  <span className="timestamp text-xl text-bronzelight">
                     {area.toLocaleString("en-IN")} sq.ft
                   </span>
                 </div>
@@ -141,18 +117,16 @@ export default function Calculator() {
                   step={10}
                   value={area}
                   onChange={(e) => setArea(Number(e.target.value))}
-                  className="mt-4 w-full cursor-pointer accent-[#c8a24b]"
+                  className="mt-4 w-full cursor-pointer accent-[#c2a26e]"
                 />
-                <div className="mt-1 flex justify-between text-[10px] uppercase tracking-widest text-sage/60">
+                <div className="mt-1 flex justify-between text-[10px] uppercase tracking-widest text-sagemist/50">
                   <span>1,100</span>
                   <span>2,200</span>
                 </div>
               </div>
 
-              <div className="mt-9">
-                <p className="text-[11px] font-medium uppercase tracking-[0.24em] text-sage">
-                  Buyback Horizon
-                </p>
+              <div className="mt-10">
+                <p className="eyebrow text-sagemist/70">Buyback Horizon</p>
                 <div className="mt-4 grid grid-cols-2 gap-3">
                   {([18, 24] as const).map((m) => (
                     <button
@@ -160,14 +134,14 @@ export default function Calculator() {
                       type="button"
                       onClick={() => setMonths(m)}
                       aria-pressed={months === m}
-                      className={`cursor-pointer rounded-xl border px-4 py-4 text-center transition-all duration-200 ${
+                      className={`cursor-pointer border px-4 py-4 text-center transition-all duration-200 ${
                         months === m
-                          ? "border-gold bg-gold/15 text-gold-light"
-                          : "border-cream/15 text-mist hover:border-gold/40"
+                          ? "border-bronzelight bg-bronze/15 text-bronzelight"
+                          : "border-fog/15 text-sagemist hover:border-bronzelight/40"
                       }`}
                     >
-                      <span className="font-display block text-xl">{m} mo</span>
-                      <span className="mt-1 block text-[10px] uppercase tracking-[0.18em] text-sage">
+                      <span className="font-display block text-2xl font-light italic">{m} mo</span>
+                      <span className="mt-1 block text-[10px] uppercase tracking-[0.18em] text-sagemist/60">
                         @ {inr(BUYBACK[m])}/sq.ft
                       </span>
                     </button>
@@ -179,36 +153,32 @@ export default function Calculator() {
 
           {/* outputs */}
           <Reveal delay={120}>
-            <div className="glass h-full rounded-3xl p-8 sm:p-10">
+            <div className="h-full border border-fog/15 bg-ink p-9 sm:p-11">
               <div className="flex items-center gap-3">
-                <TrendingUp size={20} className="text-gold-light" aria-hidden />
-                <h3 className="font-display text-xl text-cream">Projected Outcome</h3>
+                <TrendingUp size={19} className="text-bronzelight" strokeWidth={1.5} aria-hidden />
+                <h3 className="font-display text-2xl font-light italic text-fog">
+                  Projected outcome
+                </h3>
               </div>
 
-              <div className="mt-9 grid gap-4 sm:grid-cols-3">
-                <div className="rounded-2xl border border-cream/10 bg-forest/40 p-6">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-sage">
-                    You Pay Now (75%)
-                  </p>
-                  <p className="font-display mt-3 text-2xl text-cream">
+              <div className="mt-10 grid gap-px border border-fog/10 bg-fog/10 sm:grid-cols-3">
+                <div className="bg-ink p-6">
+                  <p className="eyebrow text-[9px] text-sagemist/60">You Pay Now (75%)</p>
+                  <p className="font-display mt-3 text-3xl font-light text-fog">
                     {inrShort(animPaid)}
                   </p>
                 </div>
-                <div className="rounded-2xl border border-gold/30 bg-gold/8 p-6">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light">
-                    Buyback Value
-                  </p>
-                  <p className="font-display mt-3 text-2xl text-gold-light">
+                <div className="bg-bronze/10 p-6">
+                  <p className="eyebrow text-[9px] text-bronzelight">Buyback Value</p>
+                  <p className="font-display mt-3 text-3xl font-light text-bronzelight">
                     {inrShort(animBuyback)}
                   </p>
                 </div>
-                <div className="rounded-2xl border border-cream/10 bg-forest/40 p-6">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-sage">
-                    Gross Gain
-                  </p>
+                <div className="bg-ink p-6">
+                  <p className="eyebrow text-[9px] text-sagemist/60">Gross Gain</p>
                   <p
-                    className={`font-display mt-3 text-2xl ${
-                      gain >= 0 ? "text-cream" : "text-red-300"
+                    className={`font-display mt-3 text-3xl font-light ${
+                      gain >= 0 ? "text-fog" : "text-red-300"
                     }`}
                   >
                     {gain >= 0 ? "+" : "−"}
@@ -217,60 +187,52 @@ export default function Calculator() {
                 </div>
               </div>
 
-              {/* comparison bars */}
-              <div className="mt-9 space-y-5">
+              <div className="mt-10 space-y-6">
                 <div>
-                  <div className="flex justify-between text-[11px] uppercase tracking-[0.18em] text-sage">
+                  <div className="flex justify-between text-[10px] uppercase tracking-[0.2em] text-sagemist/70">
                     <span>Capital In (75%)</span>
                     <span>{inrShort(paidNow)}</span>
                   </div>
-                  <div className="mt-2 h-3 overflow-hidden rounded-full bg-cream/8">
+                  <div className="mt-2 h-1.5 overflow-hidden bg-fog/8">
                     <div
-                      className="h-full rounded-full bg-sage/70 transition-[width] duration-700 ease-out"
+                      className="h-full bg-eucalyptus transition-[width] duration-700 ease-out"
                       style={{ width: `${(paidNow / barMax) * 100}%` }}
                     />
                   </div>
                 </div>
                 <div>
-                  <div className="flex justify-between text-[11px] uppercase tracking-[0.18em] text-gold-light">
+                  <div className="flex justify-between text-[10px] uppercase tracking-[0.2em] text-bronzelight">
                     <span>Buyback at {months} months</span>
                     <span>{inrShort(buybackValue)}</span>
                   </div>
-                  <div className="mt-2 h-3 overflow-hidden rounded-full bg-cream/8">
+                  <div className="mt-2 h-1.5 overflow-hidden bg-fog/8">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-gold to-gold-light transition-[width] duration-700 ease-out"
+                      className="h-full bg-bronzelight transition-[width] duration-700 ease-out"
                       style={{ width: `${(buybackValue / barMax) * 100}%` }}
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="mt-9 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-cream/10 pt-7">
+              <div className="mt-10 flex flex-wrap items-center gap-x-12 gap-y-5 border-t border-fog/10 pt-8">
                 <div>
-                  <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-sage">
-                    Return on Capital
-                  </p>
-                  <p className="font-display mt-1 text-3xl text-gold-light">
+                  <p className="eyebrow text-[9px] text-sagemist/60">Return on Capital</p>
+                  <p className="timestamp mt-1 text-4xl text-bronzelight">
                     {animRoi.toFixed(1)}%
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-sage">
-                    Annualised
-                  </p>
-                  <p className="font-display mt-1 text-3xl text-cream">
+                  <p className="eyebrow text-[9px] text-sagemist/60">Annualised</p>
+                  <p className="timestamp mt-1 text-4xl text-fog">
                     {animAnnual.toFixed(1)}%
                   </p>
                 </div>
-                <a
-                  href="#contact"
-                  className="ml-auto rounded-full bg-gold px-8 py-3.5 text-xs font-medium uppercase tracking-[0.18em] text-forest transition-all duration-300 hover:bg-gold-light"
-                >
+                <a href="#contact" className="btn-line btn-fill-bronze ml-auto">
                   Get Exact Pricing
                 </a>
               </div>
 
-              <p className="mt-6 text-[10px] font-light leading-relaxed text-sage/60">
+              <p className="mt-7 text-[10px] leading-relaxed text-sagemist/50">
                 Illustration only, based on the published buyback rates of ₹14,500
                 (18&nbsp;months) and ₹15,500 (24&nbsp;months) per sq.ft. Purchase price
                 shown is an adjustable assumption, not an offer. Excludes additional

@@ -22,35 +22,54 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const overPhoto = !scrolled && !open;
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-strong" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        overPhoto ? "bg-transparent" : "nav-solid"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         <a href="#top" className="group flex flex-col leading-none">
-          <span className="font-display text-xl tracking-[0.28em] text-cream transition-colors group-hover:text-gold-light sm:text-2xl">
+          <span
+            className={`font-display text-2xl font-medium tracking-[0.22em] transition-colors duration-500 ${
+              overPhoto ? "text-fog" : "text-ink"
+            }`}
+          >
             MISTWOOD
           </span>
-          <span className="mt-1 text-[10px] font-light uppercase tracking-[0.34em] text-sage">
-            by Vaishnavi Residences
+          <span
+            className={`mt-1.5 text-[9px] uppercase tracking-[0.4em] transition-colors duration-500 ${
+              overPhoto ? "text-fog/70" : "text-bronze"
+            }`}
+          >
+            Vaishnavi Residences
           </span>
         </a>
 
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-9 lg:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-light uppercase tracking-[0.18em] text-mist transition-colors hover:text-gold-light"
+              className={`group relative text-[11px] uppercase tracking-[0.26em] transition-colors duration-500 ${
+                overPhoto ? "text-fog/85 hover:text-fog" : "text-ink/75 hover:text-ink"
+              }`}
             >
               {link.label}
+              <span
+                aria-hidden
+                className="absolute -bottom-1.5 left-0 h-px w-0 bg-bronze transition-all duration-300 group-hover:w-full"
+              />
             </a>
           ))}
           <a
             href="#contact"
-            className="rounded-full border border-gold/60 px-6 py-2.5 text-sm uppercase tracking-[0.18em] text-gold-light transition-all duration-300 hover:bg-gold hover:text-forest"
+            className={`btn-line ${
+              overPhoto ? "text-fog hover:bg-fog hover:text-ink" : "btn-fill-ink"
+            }`}
+            style={{ padding: "0.7rem 1.6rem" }}
           >
             Enquire
           </a>
@@ -61,21 +80,23 @@ export default function Nav() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-cream lg:hidden"
+          className={`flex h-11 w-11 cursor-pointer items-center justify-center transition-colors duration-300 lg:hidden ${
+            overPhoto ? "text-fog" : "text-ink"
+          }`}
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
 
       {open && (
-        <div className="glass-strong border-t border-cream/5 px-6 pb-8 pt-4 lg:hidden">
-          <div className="flex flex-col gap-5">
+        <div className="nav-solid border-t border-ink/5 px-6 pb-9 pt-5 lg:hidden">
+          <div className="flex flex-col gap-6">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-sm uppercase tracking-[0.2em] text-mist transition-colors hover:text-gold-light"
+                className="font-display text-2xl font-light italic text-ink transition-colors hover:text-bronze"
               >
                 {link.label}
               </a>
@@ -83,7 +104,7 @@ export default function Nav() {
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="mt-2 w-fit rounded-full border border-gold/60 px-6 py-2.5 text-sm uppercase tracking-[0.18em] text-gold-light"
+              className="btn-line btn-fill-ink mt-2 w-fit"
             >
               Enquire
             </a>

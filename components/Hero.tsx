@@ -1,107 +1,87 @@
-"use client";
-
-import { useState } from "react";
-import { ArrowDown, MapPin } from "lucide-react";
+import Image from "next/image";
+import { ArrowDown } from "lucide-react";
 
 const stats = [
-  { value: "2.8", label: "Acres of Land" },
-  { value: "180", label: "Premium Apartments" },
+  { value: "2.8", label: "Acres" },
+  { value: "180", label: "Apartments" },
   { value: "20", label: "Row Villas" },
   { value: "03", label: "Towers" },
-  { value: "12", label: "Floors Each" },
+  { value: "12", label: "Floors" },
 ];
 
-const VIDEO_SRC =
-  "https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_30fps.mp4";
-
 export default function Hero() {
-  const [videoFailed, setVideoFailed] = useState(false);
-
   return (
-    <section id="top" className="relative flex min-h-dvh flex-col overflow-hidden bg-forest">
-      {/* cinematic video backdrop */}
-      {!videoFailed && (
-        <video
-          className="hero-video"
-          src={VIDEO_SRC}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-hidden
-          onError={() => setVideoFailed(true)}
-        />
-      )}
-      {videoFailed && (
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#0c1d14_0%,#122a1d_55%,#16321f_100%)]" />
-      )}
-
-      {/* grade + atmosphere over footage */}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,29,20,0.78)_0%,rgba(12,29,20,0.45)_45%,rgba(12,29,20,0.88)_100%)]" />
-      <div className="absolute inset-0 bg-pine/20 mix-blend-multiply" />
-      <div className="mist-layer" />
+    <section id="top" className="relative flex min-h-dvh flex-col overflow-hidden bg-ink">
+      {/* dawn photograph */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="hero-kenburns absolute inset-0">
+          <Image
+            src="/img/m21.jpg"
+            alt="Golden first light breaking through a great misty tree at Mistwood"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+      </div>
+      {/* grade: legible without killing the dawn */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,31,24,0.55)_0%,rgba(20,31,24,0.1)_40%,rgba(20,31,24,0.78)_100%)]" />
       <div className="mist-drift" />
-      <div className="mist-drift mist-drift-2" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-6 pb-16 pt-36 text-center lg:px-10">
-        <p className="mb-6 flex items-center gap-2 text-[11px] font-light uppercase tracking-[0.32em] text-gold-light sm:text-xs">
-          <MapPin size={14} className="text-gold" aria-hidden />
-          Premium Apartments &amp; Villas · Near Whitefield, Bengaluru
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-6 pb-20 pt-36 lg:px-10">
+        <p className="font-script text-4xl text-bronzelight sm:text-5xl">
+          good morning,
         </p>
 
-        <h1 className="font-display max-w-5xl text-4xl leading-[1.15] text-cream drop-shadow-[0_4px_30px_rgba(0,0,0,0.45)] sm:text-6xl lg:text-7xl">
-          Where Mornings Rise
+        <h1 className="font-display mt-3 max-w-4xl text-5xl font-light leading-[1.04] tracking-tight text-fog sm:text-7xl lg:text-[5.6rem]">
+          this is how the day
           <br />
-          <span className="text-gradient-gold">Through the Mist</span>
+          begins <span className="italic text-bronzelight">at Mistwood</span>
         </h1>
 
-        <p className="mt-8 max-w-2xl text-base font-light leading-relaxed text-mist sm:text-lg">
-          A sanctuary of calm wrapped in a living Miyawaki forest — thoughtfully
-          crafted residences where nature, wellness and modern living breathe as one.
+        <p className="mt-8 max-w-xl text-base font-normal leading-relaxed text-fog/85">
+          Premium apartments and row villas wrapped in a living Miyawaki forest,
+          near Whitefield, Bengaluru — where the first hour belongs to birdsong,
+          not traffic.
         </p>
 
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-          <a
-            href="#towers"
-            className="rounded-full bg-gold px-9 py-4 text-sm font-medium uppercase tracking-[0.18em] text-forest transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_40px_rgba(200,162,75,0.35)]"
-          >
-            Explore the Towers
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <a href="#overview" className="btn-line btn-fill-bronze">
+            Walk Through the Day
           </a>
           <a
             href="#invest"
-            className="rounded-full border border-cream/30 bg-forest/20 px-9 py-4 text-sm font-light uppercase tracking-[0.18em] text-cream backdrop-blur-sm transition-all duration-300 hover:border-gold hover:text-gold-light"
+            className="btn-line text-fog hover:bg-fog hover:text-ink"
           >
             Investor Model
           </a>
         </div>
-      </div>
 
-      {/* stats strip */}
-      <div className="relative z-10 border-t border-cream/10">
-        <div className="glass mx-auto grid max-w-7xl grid-cols-2 gap-px sm:grid-cols-5">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="flex flex-col items-center justify-center px-4 py-7 text-center"
-            >
-              <span className="font-display text-3xl text-gold-light sm:text-4xl">
-                {stat.value}
-              </span>
-              <span className="mt-2 text-[10px] font-light uppercase tracking-[0.24em] text-sage sm:text-[11px]">
-                {stat.label}
-              </span>
-            </div>
-          ))}
+        {/* day-clock stat ribbon */}
+        <div className="mt-16 border-t border-fog/20 pt-7">
+          <div className="flex flex-wrap items-baseline gap-x-12 gap-y-6">
+            <p className="timestamp text-lg text-bronzelight">05:48 — first light</p>
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex items-baseline gap-2.5">
+                <span className="font-display text-3xl font-light text-fog sm:text-4xl">
+                  {stat.value}
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-fog/60">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       <a
         href="#overview"
         aria-label="Scroll to overview"
-        className="absolute bottom-32 left-1/2 z-10 hidden -translate-x-1/2 animate-bounce text-sage transition-colors hover:text-gold-light lg:block"
+        className="absolute bottom-8 right-8 z-10 hidden h-12 w-12 items-center justify-center rounded-full border border-fog/30 text-fog/80 transition-all duration-300 hover:border-bronzelight hover:text-bronzelight lg:flex"
       >
-        <ArrowDown size={20} />
+        <ArrowDown size={18} className="animate-bounce" />
       </a>
     </section>
   );

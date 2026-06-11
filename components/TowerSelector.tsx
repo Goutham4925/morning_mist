@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Building2, Compass, MessageCircle } from "lucide-react";
+import ChapterHead from "./ChapterHead";
 import Reveal from "./Reveal";
 
 const FLOORS = 12;
@@ -28,7 +29,6 @@ const towers = [
   },
 ];
 
-/* deterministic mock inventory — same result every render */
 function unitInfo(tower: number, floor: number, unit: number) {
   const seed = tower * 131 + floor * 17 + unit * 7;
   const bhk = (seed % 5) < 2 ? "2 BHK" : "3 BHK";
@@ -49,31 +49,29 @@ export default function TowerSelector() {
     );
 
   return (
-    <section id="towers" className="relative overflow-hidden bg-forest py-24 sm:py-32">
-      <div className="topo-lines text-mist" />
-      <div className="glow-orb left-[5%] top-[20%] h-80 w-80 bg-moss/25" />
-
+    <section id="towers" className="relative overflow-hidden bg-ink py-28 sm:py-36">
+      <div className="mist-drift" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-medium uppercase tracking-[0.32em] text-gold-light">
-            Choose Your Address
-          </p>
-          <h2 className="font-display mt-5 text-3xl leading-snug text-cream sm:text-5xl">
-            Three Towers. Twelve Floors. One View You&apos;ll Love.
-          </h2>
-          <div className="gold-line mx-auto mt-8 w-24" />
-          <p className="mt-8 text-base font-light leading-relaxed text-mist">
-            Select a tower, pick a floor, and see the homes waiting there.
-          </p>
-        </Reveal>
+        <ChapterHead
+          dark
+          time="16:30 — golden hour"
+          title={
+            <>
+              Three towers. Twelve floors.
+              <br />
+              <span className="italic text-bronzelight">one view you&apos;ll love</span>
+            </>
+          }
+          lede="Select a tower, pick a floor, and see the homes waiting there."
+        />
 
-        <div className="mt-16 grid items-center gap-12 lg:grid-cols-2">
+        <div className="mt-16 grid items-center gap-14 lg:grid-cols-2">
           {/* 3D towers */}
           <Reveal>
             <div className="tower-scene flex items-end justify-center gap-10 py-8 sm:gap-14">
               {towers.map((t) => {
                 const isSel = tower === t.id;
-                const height = t.id === 1 ? 300 : 252; // center tower taller
+                const height = t.id === 1 ? 300 : 252;
                 return (
                   <button
                     key={t.id}
@@ -84,18 +82,16 @@ export default function TowerSelector() {
                     className="group cursor-pointer outline-none"
                   >
                     <div className="tower-3d relative" style={{ height, width: 76 }}>
-                      {/* side face */}
                       <div
                         className={`tower-face-side absolute left-0 top-0 h-full w-7 transition-colors duration-300 ${
-                          isSel ? "bg-moss" : "bg-pine"
+                          isSel ? "bg-moss" : "bg-inkdeep"
                         }`}
                       />
-                      {/* front face: stacked floors */}
                       <div
-                        className={`relative flex h-full w-full flex-col-reverse overflow-hidden rounded-t-sm border transition-all duration-300 ${
+                        className={`relative flex h-full w-full flex-col-reverse overflow-hidden border transition-all duration-300 ${
                           isSel
-                            ? "border-gold/70 bg-[#1a3526] shadow-[0_30px_60px_-20px_rgba(200,162,75,0.35)]"
-                            : "border-cream/15 bg-[#142b1d] group-hover:border-gold/40"
+                            ? "border-bronzelight/70 bg-[#243a2c] shadow-[0_30px_60px_-20px_rgba(194,162,110,0.3)]"
+                            : "border-fog/15 bg-[#1a2a20] group-hover:border-bronzelight/40"
                         }`}
                       >
                         {Array.from({ length: FLOORS }).map((_, fi) => {
@@ -106,23 +102,22 @@ export default function TowerSelector() {
                               key={f}
                               className={`tower-floor w-full flex-1 border-t transition-colors duration-200 ${
                                 isFloorSel
-                                  ? "border-gold/60 bg-gold/40"
-                                  : "border-cream/8"
+                                  ? "border-bronzelight/60 bg-bronze/50"
+                                  : "border-fog/8"
                               }`}
                             />
                           );
                         })}
                       </div>
-                      {/* crown */}
                       <div
-                        className={`absolute -top-2 left-1/2 h-2 w-10 -translate-x-1/2 rounded-t-sm transition-colors duration-300 ${
-                          isSel ? "bg-gold" : "bg-cream/20"
+                        className={`absolute -top-2 left-1/2 h-2 w-10 -translate-x-1/2 transition-colors duration-300 ${
+                          isSel ? "bg-bronzelight" : "bg-fog/20"
                         }`}
                       />
                     </div>
                     <p
-                      className={`mt-5 text-center text-xs uppercase tracking-[0.22em] transition-colors duration-300 ${
-                        isSel ? "text-gold-light" : "text-sage group-hover:text-mist"
+                      className={`mt-5 text-center text-[10px] uppercase tracking-[0.26em] transition-colors duration-300 ${
+                        isSel ? "text-bronzelight" : "text-sagemist/60 group-hover:text-sagemist"
                       }`}
                     >
                       {t.name}
@@ -131,44 +126,41 @@ export default function TowerSelector() {
                 );
               })}
             </div>
-            <p className="text-center text-[10px] font-light uppercase tracking-[0.22em] text-sage/60">
+            <p className="text-center text-[10px] uppercase tracking-[0.24em] text-sagemist/50">
               Stylised representation — tap a tower to select
             </p>
           </Reveal>
 
           {/* control panel */}
           <Reveal delay={120}>
-            <div className="glass rounded-3xl p-8 sm:p-10">
+            <div className="border border-fog/15 bg-inkdeep/60 p-9 sm:p-11">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display text-2xl text-cream">{selected.name}</h3>
-                  <p className="mt-2 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold-light">
-                    <Compass size={14} aria-hidden /> {selected.facing}
+                  <h3 className="font-display text-3xl font-light italic text-fog">
+                    {selected.name}
+                  </h3>
+                  <p className="mt-2.5 flex items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-bronzelight">
+                    <Compass size={13} aria-hidden /> {selected.facing}
                   </p>
                 </div>
-                <Building2 size={28} className="text-sage" aria-hidden />
+                <Building2 size={26} className="text-sagemist/50" aria-hidden />
               </div>
-              <p className="mt-4 text-sm font-light leading-relaxed text-mist">
-                {selected.note}
-              </p>
+              <p className="mt-4 text-sm leading-relaxed text-sagemist/85">{selected.note}</p>
 
-              {/* floor picker */}
-              <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.26em] text-sage">
-                Select Floor
-              </p>
-              <div className="mt-3 grid grid-cols-6 gap-2">
+              <p className="eyebrow mt-9 text-sagemist/70">Select Floor</p>
+              <div className="mt-3 grid grid-cols-6 gap-1.5">
                 {Array.from({ length: FLOORS }).map((_, fi) => {
-                  const f = FLOORS - fi; // 12 down to 1
+                  const f = FLOORS - fi;
                   return (
                     <button
                       key={f}
                       type="button"
                       onClick={() => setFloor(f)}
                       aria-pressed={floor === f}
-                      className={`cursor-pointer rounded-lg border py-2.5 text-sm transition-all duration-200 ${
+                      className={`cursor-pointer border py-2.5 text-sm transition-all duration-200 ${
                         floor === f
-                          ? "border-gold bg-gold text-forest"
-                          : "border-cream/15 text-mist hover:border-gold/50 hover:text-gold-light"
+                          ? "border-bronzelight bg-bronzelight text-ink"
+                          : "border-fog/15 text-sagemist hover:border-bronzelight/50 hover:text-bronzelight"
                       }`}
                     >
                       {f}
@@ -177,23 +169,20 @@ export default function TowerSelector() {
                 })}
               </div>
 
-              {/* units on the floor */}
-              <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.26em] text-sage">
-                Homes on Floor {floor}
-              </p>
-              <div className="mt-3 space-y-2">
+              <p className="eyebrow mt-9 text-sagemist/70">Homes on Floor {floor}</p>
+              <div className="mt-3">
                 {UNITS.map((u, ui) => {
                   const info = unitInfo(tower, floor, ui);
                   return (
                     <div
                       key={u}
-                      className="flex items-center justify-between gap-3 rounded-xl border border-cream/10 bg-forest/40 px-4 py-3"
+                      className="flex items-center justify-between gap-3 border-b border-fog/10 py-3.5 first:border-t"
                     >
-                      <div className="flex items-center gap-4">
-                        <span className="font-display text-lg text-gold-light">{u}</span>
+                      <div className="flex items-center gap-5">
+                        <span className="font-display text-xl italic text-bronzelight">{u}</span>
                         <div>
-                          <p className="text-sm text-cream">{info.bhk}</p>
-                          <p className="text-xs font-light text-sage">
+                          <p className="text-sm text-fog">{info.bhk}</p>
+                          <p className="text-xs text-sagemist/60">
                             ~{info.sqft.toLocaleString("en-IN")} sq.ft
                           </p>
                         </div>
@@ -203,12 +192,12 @@ export default function TowerSelector() {
                           href={`https://wa.me/919036526147?text=${waText(u)}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 rounded-full border border-gold/50 px-4 py-2 text-xs uppercase tracking-[0.14em] text-gold-light transition-all duration-200 hover:bg-gold hover:text-forest"
+                          className="flex items-center gap-2 border border-bronzelight/50 px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-bronzelight transition-all duration-200 hover:bg-bronzelight hover:text-ink"
                         >
-                          <MessageCircle size={13} aria-hidden /> Enquire
+                          <MessageCircle size={12} aria-hidden /> Enquire
                         </a>
                       ) : (
-                        <span className="rounded-full border border-cream/10 px-4 py-2 text-xs uppercase tracking-[0.14em] text-sage/60">
+                        <span className="border border-fog/10 px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-sagemist/40">
                           Reserved
                         </span>
                       )}
@@ -217,7 +206,7 @@ export default function TowerSelector() {
                 })}
               </div>
 
-              <p className="mt-5 text-[10px] font-light leading-relaxed text-sage/60">
+              <p className="mt-5 text-[10px] leading-relaxed text-sagemist/50">
                 Indicative inventory for illustration — please confirm live
                 availability, sizes and pricing with the sales team.
               </p>

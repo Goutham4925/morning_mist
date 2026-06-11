@@ -21,21 +21,23 @@ export default function WhatsAppFab() {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
       {open && (
-        <div className="glass-strong w-[19rem] overflow-hidden rounded-3xl border border-cream/10 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)]">
-          <div className="flex items-center gap-3 border-b border-cream/10 bg-pine/80 px-5 py-4">
+        <div className="w-[19rem] overflow-hidden border border-ink/10 bg-porcelain shadow-[0_30px_70px_-20px_rgba(28,43,34,0.45)]">
+          <div className="flex items-center gap-3 border-b border-ink/10 bg-ink px-5 py-4">
             <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366]/15">
               <MessageCircle size={18} className="text-[#25D366]" aria-hidden />
-              <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-pine bg-[#25D366]" />
+              <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-ink bg-[#25D366]" />
             </span>
             <div>
-              <p className="text-sm text-cream">Mistwood Concierge</p>
-              <p className="text-[10px] uppercase tracking-[0.18em] text-sage">
+              <p className="font-display text-base font-light italic text-fog">
+                Mistwood Concierge
+              </p>
+              <p className="text-[9px] uppercase tracking-[0.2em] text-sagemist/70">
                 Typically replies in minutes
               </p>
             </div>
           </div>
           <div className="px-5 py-5">
-            <p className="text-sm font-light leading-relaxed text-mist">
+            <p className="text-sm leading-relaxed text-eucalyptus">
               Good morning! How can we help you today?
             </p>
             <div className="mt-4 flex flex-col gap-2">
@@ -45,7 +47,7 @@ export default function WhatsAppFab() {
                   href={link(q)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-xl border border-cream/15 px-4 py-3 text-sm font-light text-cream transition-all duration-200 hover:border-[#25D366]/60 hover:bg-[#25D366]/10"
+                  className="border border-ink/15 px-4 py-3 text-sm text-ink transition-all duration-200 hover:border-[#25D366]/60 hover:bg-[#25D366]/8"
                 >
                   {q}
                 </a>
@@ -55,7 +57,7 @@ export default function WhatsAppFab() {
               href={link("I'd like to chat about Mistwood")}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3.5 text-sm font-medium text-[#0b3d22] transition-all duration-200 hover:brightness-110"
+              className="mt-4 flex items-center justify-center gap-2 bg-[#25D366] px-4 py-3.5 text-sm font-medium text-[#0b3d22] transition-all duration-200 hover:brightness-110"
             >
               <MessageCircle size={16} aria-hidden /> Start a Chat
             </a>

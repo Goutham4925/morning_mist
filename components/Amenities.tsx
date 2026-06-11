@@ -1,91 +1,102 @@
-import {
-  Activity,
-  Baby,
-  Bike,
-  Briefcase,
-  CloudRain,
-  Dog,
-  Dumbbell,
-  Flower2,
-  Footprints,
-  Gamepad2,
-  Landmark,
-  LeafyGreen,
-  PartyPopper,
-  ShieldCheck,
-  Sparkles,
-  Theater,
-  Trees,
-  Waves,
-  Zap,
-} from "lucide-react";
+import Image from "next/image";
+import ChapterHead from "./ChapterHead";
 import Reveal from "./Reveal";
 
-const amenities = [
-  { icon: Landmark, label: "Grand Clubhouse" },
-  { icon: Waves, label: "Swimming Pool" },
-  { icon: Dumbbell, label: "Fitness Studio" },
-  { icon: Flower2, label: "Yoga & Meditation Deck" },
-  { icon: Trees, label: "Miyawaki Forest" },
-  { icon: Footprints, label: "Jogging & Walking Trails" },
-  { icon: Baby, label: "Children's Play Area" },
-  { icon: Theater, label: "Open-Air Amphitheatre" },
-  { icon: Gamepad2, label: "Indoor Games Lounge" },
-  { icon: PartyPopper, label: "Multipurpose Hall" },
-  { icon: Sparkles, label: "Senior Citizen Court" },
-  { icon: Dog, label: "Pet Park" },
-  { icon: Activity, label: "Outdoor Sports Courts" },
-  { icon: Bike, label: "Cycling Track" },
-  { icon: Briefcase, label: "Co-Working Lounge" },
-  { icon: LeafyGreen, label: "Landscaped Gardens" },
-  { icon: ShieldCheck, label: "24×7 Security" },
-  { icon: Zap, label: "EV Charging Bays" },
-  { icon: CloudRain, label: "Rainwater Harvesting" },
+/* grouped by the hour they're most alive — the day-clock again */
+const columns = [
+  {
+    hour: "Mornings",
+    items: [
+      "Jogging & Walking Trails",
+      "Yoga & Meditation Deck",
+      "Swimming Pool",
+      "Fitness Studio",
+      "Cycling Track",
+      "Miyawaki Forest",
+      "Outdoor Sports Courts",
+    ],
+  },
+  {
+    hour: "Afternoons",
+    items: [
+      "Grand Clubhouse",
+      "Co-Working Lounge",
+      "Indoor Games Lounge",
+      "Children's Play Area",
+      "Pet Park",
+      "Landscaped Gardens",
+    ],
+  },
+  {
+    hour: "Evenings",
+    items: [
+      "Open-Air Amphitheatre",
+      "Multipurpose Hall",
+      "Senior Citizen Court",
+      "24×7 Security",
+      "EV Charging Bays",
+      "Rainwater Harvesting",
+    ],
+  },
 ];
 
 export default function Amenities() {
   return (
-    <section id="amenities" className="relative overflow-hidden bg-forest py-24 sm:py-32">
-      <div className="topo-lines text-mist" />
-      <div className="glow-orb left-[-5%] top-[30%] h-80 w-80 bg-moss/25" />
-
+    <section id="amenities" className="relative overflow-hidden bg-fog py-28 sm:py-36">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-medium uppercase tracking-[0.32em] text-gold-light">
-            19 Curated Experiences
-          </p>
-          <h2 className="font-display mt-5 text-3xl leading-snug text-cream sm:text-5xl">
-            Amenities Woven Into Nature
-          </h2>
-          <div className="gold-line mx-auto mt-8 w-24" />
-          <p className="mt-8 text-base font-light leading-relaxed text-mist">
-            Every amenity at Mistwood is designed to bring comfort, wellness and
-            togetherness into everyday life — for every age, every mood, every morning.
-          </p>
-        </Reveal>
-
-        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {amenities.map((amenity, i) => (
-            <Reveal key={amenity.label} delay={(i % 4) * 70}>
-              <div className="glass group flex h-full items-center gap-4 rounded-xl px-5 py-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/40">
-                <amenity.icon
-                  size={20}
-                  className="shrink-0 text-sage transition-colors duration-300 group-hover:text-gold-light"
-                  aria-hidden
+        <div className="grid items-start gap-16 lg:grid-cols-[2fr_3fr] lg:gap-20">
+          <div className="lg:sticky lg:top-28">
+            <ChapterHead
+              align="left"
+              time="all day — nineteen ways"
+              title={
+                <>
+                  Amenities, kept by
+                  <br />
+                  <span className="italic text-moss">the clock</span>
+                </>
+              }
+              lede="Nineteen curated experiences, arranged by the hour they come alive — for every age, every mood, every morning."
+            />
+            <Reveal delay={120}>
+              <div className="relative mt-12 hidden aspect-[4/3] overflow-hidden lg:block">
+                <Image
+                  src="/img/m33.jpg"
+                  alt="An unhurried afternoon at the plunge pool"
+                  fill
+                  sizes="36vw"
+                  className="object-cover"
                 />
-                <span className="text-sm font-light leading-snug text-mist">
-                  {amenity.label}
-                </span>
               </div>
             </Reveal>
-          ))}
-          <Reveal delay={210}>
-            <div className="flex h-full items-center justify-center rounded-xl border border-dashed border-gold/30 px-5 py-5">
-              <span className="text-center text-sm font-light italic text-gold-light">
-                ...and more to discover
-              </span>
-            </div>
-          </Reveal>
+          </div>
+
+          {/* the index */}
+          <div>
+            {columns.map((col, ci) => (
+              <Reveal key={col.hour} delay={ci * 80}>
+                <div className={ci > 0 ? "mt-12" : ""}>
+                  <p className="timestamp text-xl text-bronze">{col.hour}</p>
+                  <ul className="mt-4">
+                    {col.items.map((item) => (
+                      <li
+                        key={item}
+                        className="group flex items-baseline justify-between gap-6 border-b border-ink/10 py-4 transition-colors duration-200 first:border-t hover:bg-porcelain"
+                      >
+                        <span className="font-display text-xl font-light text-ink transition-transform duration-300 group-hover:translate-x-2 sm:text-2xl">
+                          {item}
+                        </span>
+                        <span
+                          aria-hidden
+                          className="h-px w-8 shrink-0 bg-bronze/0 transition-colors duration-300 group-hover:bg-bronze"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

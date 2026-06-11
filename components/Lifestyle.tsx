@@ -5,28 +5,25 @@ import Image from "next/image";
 
 const moments = [
   {
-    time: "05:48 AM",
-    title: "Mist Mornings",
-    text: "The forest exhales. Walking trails glisten, birdsong fills the canopy, and the day begins at your own pace.",
-    image:
-      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&q=75",
-    alt: "Sunlit walking path through a dense green forest",
+    time: "06:15",
+    title: "The Morning Run",
+    text: "The forest exhales. Trails glisten, birdsong fills the canopy, and the day begins at your own pace.",
+    image: "/img/m19.jpg",
+    alt: "A couple jogging up a forest trail in the early light",
   },
   {
-    time: "06:30 PM",
-    title: "Forest Evenings",
-    text: "Golden light through the Miyawaki canopy. The amphitheatre hums, children race the cycling track, dinner can wait.",
-    image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=75",
-    alt: "Golden evening light falling over misty green hills",
+    time: "19:00",
+    title: "Reading Light",
+    text: "Golden hour pours through the tall windows. Somewhere below, the amphitheatre hums. Dinner can wait.",
+    image: "/img/m11.jpg",
+    alt: "A man reading on a sofa as sunset fills the window",
   },
   {
-    time: "Weekends",
+    time: "Sunday",
     title: "Togetherness",
     text: "Pool mornings, clubhouse afternoons, lawn evenings under open sky — a community that gathers without trying.",
-    image:
-      "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1920&q=75",
-    alt: "A large family holding hands at sunset",
+    image: "/img/m23.jpg",
+    alt: "A family wrapped in a blanket together on an outdoor sofa",
   },
 ];
 
@@ -68,8 +65,7 @@ function ParallaxPanel({
   const align = index % 2 === 0 ? "items-start text-left" : "items-end text-right";
 
   return (
-    <div ref={ref} className="relative flex min-h-[78vh] items-center overflow-hidden bg-forest">
-      {/* photo backdrop, slow parallax drift */}
+    <div ref={ref} className="relative flex min-h-[80vh] items-center overflow-hidden bg-inkdeep">
       <div
         className="absolute inset-[-8%]"
         style={reduced ? undefined : { transform: `translateY(${offset * -0.6}px)` }}
@@ -80,18 +76,15 @@ function ParallaxPanel({
           fill
           sizes="100vw"
           className="object-cover"
-          quality={75}
+          quality={78}
         />
       </div>
-      {/* cinematic grade */}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,29,20,0.82)_0%,rgba(12,29,20,0.35)_50%,rgba(12,29,20,0.85)_100%)]" />
-      <div className="absolute inset-0 bg-pine/30 mix-blend-multiply" />
-      <div className="mist-drift" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,31,24,0.7)_0%,rgba(20,31,24,0.2)_50%,rgba(20,31,24,0.75)_100%)]" />
 
-      {/* oversized backdrop word, parallaxed */}
+      {/* oversized italic word, parallaxed */}
       <span
         aria-hidden
-        className="font-display pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[18vw] text-cream/5 lg:text-[14vw]"
+        className="font-display pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[17vw] font-light italic text-fog/5 lg:text-[12vw]"
         style={reduced ? undefined : { transform: `translate(-50%, calc(-50% + ${offset * 2.2}px))` }}
       >
         {moment.title}
@@ -102,14 +95,12 @@ function ParallaxPanel({
           className={`flex flex-col ${align}`}
           style={reduced ? undefined : { transform: `translateY(${offset}px)` }}
         >
-          <p className="text-xs font-medium uppercase tracking-[0.4em] text-gold-light">
-            {moment.time}
-          </p>
-          <h3 className="font-display mt-4 text-4xl text-cream drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] sm:text-6xl">
+          <p className="timestamp text-xl text-bronzelight">{moment.time}</p>
+          <h3 className="font-display mt-3 text-5xl font-light text-fog drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] sm:text-7xl">
             {moment.title}
           </h3>
-          <div className="gold-line mt-7 w-20" />
-          <p className="mt-7 max-w-md text-base font-light leading-relaxed text-mist sm:text-lg">
+          <div className="rule-bronze mt-7 w-24" />
+          <p className="mt-7 max-w-md text-base font-normal leading-relaxed text-fog/90 sm:text-lg">
             {moment.text}
           </p>
         </div>
